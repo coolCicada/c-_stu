@@ -8,7 +8,7 @@ int main() {
     for (int i = 1; i < a.size(); i ++) {
       if (a[i] > a[index]) index = i;
     }
-    cout << a.insert(index + 1, b) << endl;
+    cout << a.substr(0, index + 1) + b + a.substr(index + 1) << endl;
   }
 
   return 0;
