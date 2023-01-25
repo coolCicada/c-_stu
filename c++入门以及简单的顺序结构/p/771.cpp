@@ -16,10 +16,10 @@ int main() {
       int j = i;
       while (j < str.size() && str[j] == str[i]) {
         j ++;
-        if (j - i > cnt) {
-          cnt = j - i;
-          c = str[i];
-        }
+      }
+      if (j - i > cnt) {
+        cnt = j - i;
+        c = str[i];
       }
       i = j - 1;
     }
