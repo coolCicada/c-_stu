@@ -25,15 +25,6 @@ int main() {
 
   a.pop_back();
   printVector(a);
-
-  deque<int> queue;
-  queue.push_back(1);
-  queue.push_back(2);
-  queue.push_front(9);
-
-  for (int i = 0; i < queue.size(); i ++) {
-    cout << queue[i] << ' ';
-  }
   
   cout << "---set---" << endl;
   unordered_set<int> set;
