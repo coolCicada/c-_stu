@@ -22,7 +22,7 @@ int main() {
   return 0;
 }
 
-void quickSort(int q[], int l, int r) {
+void quickSort(int nums[], int l, int r) {
   if (l >= r) return;
   int x = nums[l + r >> 1];
   int i = l - 1, j = r + 1;
