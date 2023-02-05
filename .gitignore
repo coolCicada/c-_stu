@@ -9,3 +9,4 @@ yarn.lock
 logs/
 target/
 pid
+*.out
