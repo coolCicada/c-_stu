@@ -2,44 +2,43 @@
 
 using namespace std;
 
-const int N = 100001;
-int a[N], na[N];
-int head = 0, idx = 1;
-
 int main() {
 	int m;
 	cin >> m;
 
+	int head = 0, idx = 1;
+	vector<int> v(100001), p(100001);
 	while (m --) {
-		char x;				
-		cin >> x;
-		if (x == 'H') {
-			int v;
-			cin >> v;
-			a[idx] = v;
-			na[idx] = head;
-			head = idx ++;
-		} else if (x == 'D') {
-			int k;
-			cin >> k;
-			
-			if (k == 0) head = na[head];
-			else na[k] = na[na[k]];
-		} else {
+		char a;
+		cin >> a;
 
+		if (a == 'H') {
+			int x;
+			cin >> x;
+			
+			v[idx] = x;
+			p[idx] = head;
+			head = idx ++;
+		} else if (a == 'I') {
 			int k, x;
 			cin >> k >> x;
 
-			a[idx] = x;
-			na[idx] = na[k];
-			na[k] = idx ++;
+			v[idx] = x;
+			p[idx] = p[k];
+			p[k] = idx ++;
+		} else {
+			int k;
+			cin >> k;
+			if (k == 0) {
+				head = p[head];
+			} else {
+				p[k] = p[p[k]];
+			}
 		}
 	}
 
-	for (int i = head; i;) {
-		cout << a[i] << ' ';
-		i = na[i];
+	for (int i = head; i; i = p[i]) {
+		cout << v[i] << ' ';
 	}
-
 	return 0;
 }
