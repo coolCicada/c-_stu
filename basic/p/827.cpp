@@ -2,16 +2,19 @@
 
 using namespace std;
 
-vector<int> a(100010), l(100010), r(100010);
-int idx = 2;
+const int N = 100010;
+int a[N], l[N], r[N], head = 0, tail = 1, idx = 2;
+void init() {
+	r[0] = 1;
+	l[1] = 0;
+}
 void add(int k, int v) {
 	a[idx] = v;
-	r[idx] = k;
-	l[idx] = l[k];
-	r[l[k]] = idx;
-	l[k] = idx ++;
+	l[idx] = k;
+	r[idx] = r[k];
+	l[r[k]] = idx;
+	r[k] = idx ++;
 }
-
 void remove(int k) {
 	r[l[k]] = r[k];
 	l[r[k]] = l[k];
@@ -19,44 +22,40 @@ void remove(int k) {
 int main() {
 	int m;
 	cin >> m;
-
-	r[0] = 1;
-	l[1] = 0;
+	init();
 	while (m --) {
 		string t;
 		cin >> t;
 
-		if (t == "L") {
+		if (t == "R") {
 			int x;
 			cin >> x;
-
-			add(r[0], x);
-		} else if (t == "R") {
-			int x;
-			cin >> x;
-
-			add(1, x);
+			add(l[1], x);
 		} else if (t == "D") {
 			int k;
 			cin >> k;
 			remove(k + 1);
+		} else if (t == "L") {
+			int x;
+			cin >> x;
+			add(0, x);
 		} else if (t == "IL") {
-			int k, x;
-			cin >> k >> x;
+			int k, v;
+			cin >> k >> v;
 
-			add(k + 1, x);
+			add(l[k + 1], v);
 		} else {
-			int k, x;
-			cin >> k >> x;
+			int k, v;
+			cin >> k >> v;
 
-			add(r[k + 1], x);
+			add(k + 1, v);
 		}
 	}
 
-//	for (int i = 0; i < 10; i ++) {
-//		cout << a[i] << ' ' << l[i] << ' ' << r[i] << endl;
-//	}
 	for (int i = r[0]; i != 1; i = r[i]) {
 		cout << a[i] << ' ';
 	}
+
+	return 0;
+
 }
